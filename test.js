@@ -3,14 +3,15 @@ const url = require('url')
 const querystring = require('querystring')
 
 const server = http.createServer((req, res) => {
-  var params = querystring.parse(url.parse(req.url).query)
-  res.writeHead(200, { 'content-Type': 'text/html' })
-  if ('prenon' in params && 'non' in params) {
-    res.write('hi ' + params['prenon'] + 'name' + params['non'])
-  } else {
-    res.write('donner non et prenom')
-  }
+  res.writeHead(200)
+  res.write('donner non et prenom')
   res.end()
 })
 
+server.on('close', function () {
+  console.log('bye bye')
+})
+
 server.listen(5000)
+
+server.close()
